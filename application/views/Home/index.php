@@ -12,11 +12,19 @@
 		.form-rounded {
 			border-radius: 1rem;
 		}
+
+		.form-circle {
+			border-radius: 3rem;
+		}
+
+		.navbar-order {
+			padding-bottom: 1rem;
+		}
 	</style>
 </head>
 
 <body>
-	<section>
+	<section class="navbar-order ">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#">
@@ -58,13 +66,46 @@
 			</div>
 		</nav>
 	</section>
-	<section>
-		<div class="container overflow-hidden">
-			<div class="row border align-items-center">
+
+
+	<section class="body-order ">
+		<div class="container ">
+
+			<div class="row border form-rounded align-items-center">
 				<div class="col-md-8">
 					<!-- // form cari barang -->
 					<div class="container">
-						<div class="card">
+						<!-- menu options -->
+						<div class="row">
+							<div class="col-md-8 mt-4 mb-4 ">
+								<a href="#" class="btn position-relative form-circle">
+									<div class="card bg-info form-circle overflow-hidden">
+										<div class="card-body ">
+											<img src="<?= base_url('assets/img/') ?>cycle.png" alt="" width="50" height="44" class="d-inline-block align-text-top">
+										</div>
+									</div>
+
+								</a>
+								<a href="#" class="btn position-relative form-circle">
+									<div class="card bg-info form-circle overflow-hidden">
+										<div class="card-body ">
+											<img src="<?= base_url('assets/img/') ?>cycle.png" alt="" width="50" height="44" class="d-inline-block align-text-top">
+										</div>
+									</div>
+
+								</a>
+								<a href="#" class="btn position-relative form-circle">
+									<div class="card bg-info form-circle overflow-hidden">
+										<div class="card-body ">
+											<img src="<?= base_url('assets/img/') ?>cycle.png" alt="" width="50" height="44" class="d-inline-block align-text-top">
+										</div>
+									</div>
+
+								</a>
+							</div>
+						</div>
+						<!-- end menu options -->
+						<div class="card ">
 							<div class="card-body">
 								<label for="" class="form-label">Order Barang</label>
 								<div class="input-group mb3">
@@ -72,7 +113,7 @@
 										<!-- icon disini -->
 										<i class="fas fa-search-dollar"></i>
 									</span>
-									<input type="text" id="barang" class="form-control form-rounded">
+									<input type="text" id="barang" class="form-control form-rounded is-invalid	">
 								</div>
 
 							</div>
@@ -80,18 +121,19 @@
 						<div class="card">
 							<div class="card-header">
 								<div class="row">
-									<div class="col-md-3 ">Nama Item</div>
+									<div class="col-md-2 ">Nama Item</div>
 									<div class="col-md-1 ">Qty</div>
 									<div class="col-md-2 text-center">Harga <i class="fas fa-dollar-sign"></i>
 									</div>
-									<div class="col"></div>
+									<div class="col">Potongan</div>
 									<div class="col-md-1 ">Disc</div>
 									<div class="col-md-2 ">Harga Terjual</div>
+									<div class="col-md-1 "></div>
 								</div>
 							</div>
 							<div class="card-body">
-								<div class="row">
-									<div class="col-md-3">Gear Vechicle</div>
+								<div class="row mb-2 rowtable" id="rowtable" onclick="clickRow(this)">
+									<div class="col-md-2">Gear Vechicle</div>
 									<div class="col-md-1">25</div>
 									<div class="col-md-2">Rp. 25.000,00
 									</div>
@@ -102,7 +144,103 @@
 										</div>
 									</div>
 									<div class="col-md-1">15%</div>
-									<div class="col-md-2">Rp. 12.0000000,00 </div>
+									<div class="col-md-2">Rp. 12.000,00 </div>
+									<div class="col-md-1">
+										<a href="#" class="btn btn-outline-info form-rounded">
+											<i class="fas fa-minus"></i>
+										</a>
+									</div>
+								</div>
+								<div class="row mb-2 rowtable" id="rowtable" onclick="clickRow(this)">
+									<div class="col-md-2">Gear Vechicle</div>
+									<div class="col-md-1">25</div>
+									<div class="col-md-2">Rp. 25.000,00
+									</div>
+									<div class="col">
+										<label for="">Rp. 0</label>
+										<div class="input-group mb3 d-none">
+											<input type="text" id="barang" class="form-control form-rounded">
+										</div>
+									</div>
+									<div class="col-md-1">15%</div>
+									<div class="col-md-2">Rp. 12.000,00 </div>
+									<div class="col-md-1">
+										<a href="#" class="btn btn-outline-info form-rounded">
+											<i class="fas fa-minus"></i>
+										</a>
+									</div>
+								</div>
+								<div class="row mb-2 rowtable" id="rowtable" onclick="clickRow(this)">
+									<div class="col-md-2">Gear Vechicle</div>
+									<div class="col-md-1">25</div>
+									<div class="col-md-2">Rp. 25.000,00
+									</div>
+									<div class="col">
+										<label for="">Rp. 0</label>
+										<div class="input-group mb3 d-none">
+											<input type="text" id="barang" class="form-control form-rounded">
+										</div>
+									</div>
+									<div class="col-md-1">15%</div>
+									<div class="col-md-2">Rp. 12.000,00 </div>
+									<div class="col-md-1">
+										<a href="#" class="btn btn-outline-info form-rounded">
+											<i class="fas fa-minus"></i>
+										</a>
+									</div>
+								</div>
+								<div class="row mb-2 rowtable" id="rowtable" onclick="clickRow(this)">
+									<div class="col-md-2">Gear Vechicle</div>
+									<div class="col-md-1">25</div>
+									<div class="col-md-2">Rp. 25.000,00
+									</div>
+									<div class="col">
+										<label for="">Rp. 0</label>
+										<div class="input-group mb3 d-none">
+											<input type="text" id="barang" class="form-control form-rounded">
+										</div>
+									</div>
+									<div class="col-md-1">15%</div>
+									<div class="col-md-2">Rp. 12.000,00 </div>
+									<div class="col-md-1">
+										<a href="#" class="btn btn-outline-info form-rounded">
+											<i class="fas fa-minus"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-header">
+								<div class="row">
+									<div class="col"></div>
+									<div class="col-md-3 ">
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item disabled">Total Belanja</li>
+											<li class="list-group-item disabled">Total Potongan</li>
+											<li class="list-group-item disabled">Qty</li>
+										</ul>
+									</div>
+									<div class="col-md-6 ">
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item">Rp. 12.000,00</li>
+											<li class="list-group-item">Rp. 0</li>
+											<li class="list-group-item">25 item</li>
+										</ul>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 text-end align-items-center">
+
+									</div>
+									<div class="col-md-6">
+										<form class="form-floating mb-1 mt-1">
+											<input type="text" class="form-control " id="floatingInputInvalid" placeholder="Rp. 0.000.000">
+											<label for="floatingInputInvalid">Total Bayar (Rp. )</label>
+										</form>
+										<form class="form-floating mb-1 mt-1">
+											<input type="text" class="form-control bg-warning" id="floatingInputInvalid" placeholder="Rp. 0.000.000">
+											<label for="floatingInputInvalid">Kembalian (Rp. )</label>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -119,6 +257,19 @@
 
 
 	<script type="text/javascript" src="<?= base_url('assets/') ?>/bootstrap@5.1.2/dist/js/bootstrap.js"></script>
+	<script>
+		clickRow = async (a) => {
+
+			if (!a.classList.contains("bg-info")) {
+				var items = document.getElementsByClassName("rowtable");
+				for (var i = 0; i < items.length; i++) {
+					items[i].classList.remove("bg-info");
+				}
+				a.classList.add("bg-info");
+
+			}
+		}
+	</script>
 </body>
 
 </html>
