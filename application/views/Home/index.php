@@ -233,11 +233,11 @@
 									</div>
 									<div class="col-md-6">
 										<form class="form-floating mb-1 mt-1">
-											<input type="text" class="form-control " id="floatingInputInvalid" placeholder="Rp. 0.000.000">
+											<input value="0" type="text" class="form-control " id="floatingInputInvalid" placeholder="Rp. 0.000.000">
 											<label for="floatingInputInvalid">Total Bayar (Rp. )</label>
 										</form>
 										<form class="form-floating mb-1 mt-1">
-											<input type="text" class="form-control bg-warning" id="floatingInputInvalid" placeholder="Rp. 0.000.000">
+											<input type="text" class="form-control bg-warning" readonly id="floatingInputInvalid" placeholder="Rp. 0.000.000">
 											<label for="floatingInputInvalid">Kembalian (Rp. )</label>
 										</form>
 									</div>

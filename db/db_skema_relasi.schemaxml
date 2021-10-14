@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8mb4" collation="utf8mb4_general_ci">db_pos_ishaq</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="settings" view="colnames">
+<left>0</left>
+<top>0</top>
+<width>119</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `settings` (
+  `id_seting` bigint(20) NOT NULL,
+  `nama_seting` varchar(50) DEFAULT NULL,
+  `value_seting` longtext DEFAULT NULL,
+  PRIMARY KEY (`id_seting`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="users" view="colnames">
+<left>128</left>
+<top>4</top>
+<width>115</width>
+<height>265</height>
+<sql_create_table>CREATE TABLE `users` (
+  `id_user` bigint(20) NOT NULL,
+  `nama_user` varchar(50) DEFAULT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `avatar_user` text DEFAULT NULL,
+  `jenis_user` tinyint(1) NOT NULL COMMENT '1=back office, 2=gudang',
+  `status_user` tinyint(1) NOT NULL COMMENT '1=aktif, 0=tidak aktif',
+  `login_user` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1=online, 0=offline',
+  `last_login` datetime DEFAULT current_timestamp(),
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tb_barang" view="colnames">
+<left>354</left>
+<top>267</top>
+<width>95</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `tb_barang` (
+  `kodeseri` char(15) NOT NULL,
+  `nama` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`kodeseri`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="tb_kategori_path" view="colnames">
+<left>474</left>
+<top>470</top>
+<width>176</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `tb_kategori_path` (
+  `id_path` int(11) NOT NULL,
+  `kodeseri_kategori` char(15) DEFAULT NULL,
+  `id_kategori_path` char(15) DEFAULT NULL,
+  PRIMARY KEY (`id_path`),
+  KEY `kodeseri_kategori` (`kodeseri_kategori`),
+  KEY `id_kategori_path` (`id_kategori_path`),
+  CONSTRAINT `tb_kategori_path_ibfk_1` FOREIGN KEY (`kodeseri_kategori`) REFERENCES `tb_barang` (`kodeseri`) ON UPDATE CASCADE,
+  CONSTRAINT `tb_kategori_path_ibfk_2` FOREIGN KEY (`id_kategori_path`) REFERENCES `tb_kategori` (`id_kategori`) ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="tb_stock" view="colnames">
+<left>674</left>
+<top>251</top>
+<width>174</width>
+<height>205</height>
+<sql_create_table>CREATE TABLE `tb_stock` (
+  `id_stock` int(11) NOT NULL,
+  `kodeseri_stock` char(15) DEFAULT NULL,
+  `id_path_stock` int(11) DEFAULT NULL,
+  `qty` double DEFAULT NULL,
+  `harga_modal` double DEFAULT NULL,
+  `id_masuk` char(15) DEFAULT NULL,
+  PRIMARY KEY (`id_stock`),
+  KEY `kodeseri_stock` (`kodeseri_stock`),
+  KEY `id_kategori_stock` (`id_path_stock`),
+  CONSTRAINT `tb_stock_ibfk_1` FOREIGN KEY (`kodeseri_stock`) REFERENCES `tb_barang` (`kodeseri`),
+  CONSTRAINT `tb_stock_ibfk_2` FOREIGN KEY (`id_path_stock`) REFERENCES `tb_kategori_path` (`id_path`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="tb_jual" view="colnames">
+<left>997</left>
+<top>711</top>
+<width>131</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `tb_jual` (
+  `id_jual` char(15) NOT NULL,
+  `tanggal_jual` date DEFAULT NULL,
+  `total_bayar` double DEFAULT NULL,
+  `total_potongan` double DEFAULT NULL,
+  PRIMARY KEY (`id_jual`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="tb_detailjual" view="colnames">
+<left>1201</left>
+<top>512</top>
+<width>152</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `tb_detailjual` (
+  `id_jual_detail` char(15) DEFAULT NULL,
+  `id_harga_detailjual` int(11) DEFAULT NULL,
+  `qty_detailjual` int(11) DEFAULT NULL,
+  `harga_jual` double DEFAULT NULL,
+  `potongan` double DEFAULT NULL,
+  KEY `id_jual_detail` (`id_jual_detail`),
+  KEY `id_harga_detailjual` (`id_harga_detailjual`),
+  CONSTRAINT `tb_detailjual_ibfk_1` FOREIGN KEY (`id_jual_detail`) REFERENCES `tb_jual` (`id_jual`),
+  CONSTRAINT `tb_detailjual_ibfk_2` FOREIGN KEY (`id_harga_detailjual`) REFERENCES `tb_harga` (`id_harga`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="tb_harga" view="colnames">
+<left>922</left>
+<top>248</top>
+<width>128</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `tb_harga` (
+  `id_harga` int(11) NOT NULL,
+  `id_stock` int(11) DEFAULT NULL,
+  `tanggal_harga` date DEFAULT NULL,
+  `harga_jual` double DEFAULT NULL,
+  `disc` double DEFAULT NULL,
+  `potongan` double DEFAULT NULL,
+  PRIMARY KEY (`id_harga`),
+  KEY `id_stock` (`id_stock`),
+  CONSTRAINT `tb_harga_ibfk_1` FOREIGN KEY (`id_stock`) REFERENCES `tb_stock` (`id_stock`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="tb_kategori" view="colnames">
+<left>673</left>
+<top>643</top>
+<width>135</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `tb_kategori` (
+  `id_kategori` char(15) NOT NULL,
+  `nama_kategori` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`id_kategori`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
